@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Расписание уроков</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .buttons-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .day-button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+            flex-grow: 1;
+        }
+        .day-button:hover {
+            background-color: #45a049;
+        }
+        .schedule {
+            display: none;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            background-color: #f9f9f9;
+        }
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .schedule th, .schedule td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .schedule th {
+            background-color: #f2f2f2;
+        }
+        .schedule tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        h2 {
+            color: #333;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Расписание уроков 3Б Класс. Школа № 186</h1>
+    
+    <div class="buttons-container">
+        <button class="day-button" onclick="showSchedule('monday')">Понедельник</button>
+        <button class="day-button" onclick="showSchedule('tuesday')">Вторник</button>
+        <button class="day-button" onclick="showSchedule('wednesday')">Среда</button>
+        <button class="day-button" onclick="showSchedule('thursday')">Четверг</button>
+        <button class="day-button" onclick="showSchedule('friday')">Пятница</button>
+    </div>
+    
+    <div id="monday" class="schedule">
+        <h2>Понедельник</h2>
+        <table class="schedule-table">
+            <tr><th>№</th><th>Время</th><th>Наименование</th></tr>
+            <tr><td>1</td><td>8.30-9.10</td><td>Кл.час/портф</td></tr>
+            <tr><td>2</td><td>9.20-10.00</td><td>Математика</td></tr>
+            <tr><td>3</td><td>10.10-10.50</td><td>Физкультура</td></tr>
+            <tr><td>4</td><td>10.50-11.10</td><td>ЗАВТРАК</td></tr>
+            <tr><td>4</td><td>11.10-11.50</td><td>Рус.язык</td></tr>
+            <tr><td>5</td><td>12.10-12.50</td><td>Д.П.</td></tr>
+            <tr><td>6</td><td>13.00-13.40</td><td>Чтение</td></tr>
+            <tr><td>7</td><td>13.50-14.30</td><td>Самоподгототовка</td></tr>
+            <tr><td>7</td><td>14.30-14-50</td><td>ОБЕД</td></tr>
+            <tr><td>8</td><td>14.50-15.30</td><td>ВМИ</td></tr>
+        </table>
+    </div>
+    
+    <div id="tuesday" class="schedule">
+        <h2>Вторник</h2>
+        <table class="schedule-table">
+            <tr><th>№</th><th>Время</th><th>Наименование</th></tr>
+            <tr><td>1</td><td>8.30-9.10</td><td>Кл.час/портф</td></tr>
+            <tr><td>2</td><td>9.20-10.00</td><td>Математика</td></tr>
+            <tr><td>3</td><td>10.10-10.50</td><td>Физкультура</td></tr>
+            <tr><td>4</td><td>10.50-11.10</td><td>ЗАВТРАК</td></tr>
+            <tr><td>4</td><td>11.10-11.50</td><td>Рус.язык</td></tr>
+            <tr><td>5</td><td>12.10-12.50</td><td>Д.П.</td></tr>
+            <tr><td>6</td><td>13.00-13.40</td><td>Чтение</td></tr>
+            <tr><td>7</td><td>13.50-14.30</td><td>Самоподгототовка</td></tr>
+            <tr><td>7</td><td>14.30-14-50</td><td>ОБЕД</td></tr>
+            <tr><td>8</td><td>14.50-15.30</td><td>ВМИ</td></tr>
+        </table>
+    </div>
+    
+    <div id="wednesday" class="schedule">
+        <h2>Среда</h2>
+         <table class="schedule-table">
+            <tr><th>№</th><th>Время</th><th>Наименование</th></tr>
+            <tr><td>1</td><td>8.30-9.10</td><td>Кл.час/портф</td></tr>
+            <tr><td>2</td><td>9.20-10.00</td><td>Математика</td></tr>
+            <tr><td>3</td><td>10.10-10.50</td><td>Физкультура</td></tr>
+            <tr><td>4</td><td>10.50-11.10</td><td>ЗАВТРАК</td></tr>
+            <tr><td>4</td><td>11.10-11.50</td><td>Рус.язык</td></tr>
+            <tr><td>5</td><td>12.10-12.50</td><td>Д.П.</td></tr>
+            <tr><td>6</td><td>13.00-13.40</td><td>Чтение</td></tr>
+            <tr><td>7</td><td>13.50-14.30</td><td>Самоподгототовка</td></tr>
+            <tr><td>7</td><td>14.30-14-50</td><td>ОБЕД</td></tr>
+            <tr><td>8</td><td>14.50-15.30</td><td>ВМИ</td></tr>
+        </table>
+    </div>
+    
+    <div id="thursday" class="schedule">
+        <h2>Четверг</h2>
+         <table class="schedule-table">
+            <tr><th>№</th><th>Время</th><th>Наименование</th></tr>
+            <tr><td>1</td><td>8.30-9.10</td><td>Кл.час/портф</td></tr>
+            <tr><td>2</td><td>9.20-10.00</td><td>Математика</td></tr>
+            <tr><td>3</td><td>10.10-10.50</td><td>Физкультура</td></tr>
+            <tr><td>4</td><td>10.50-11.10</td><td>ЗАВТРАК</td></tr>
+            <tr><td>4</td><td>11.10-11.50</td><td>Рус.язык</td></tr>
+            <tr><td>5</td><td>12.10-12.50</td><td>Д.П.</td></tr>
+            <tr><td>6</td><td>13.00-13.40</td><td>Чтение</td></tr>
+            <tr><td>7</td><td>13.50-14.30</td><td>Самоподгототовка</td></tr>
+            <tr><td>7</td><td>14.30-14-50</td><td>ОБЕД</td></tr>
+            <tr><td>8</td><td>14.50-15.30</td><td>ВМИ</td></tr>
+        </table>
+    </div>
+    
+    <div id="friday" class="schedule">
+        <h2>Пятница</h2>
+         <table class="schedule-table">
+            <tr><th>№</th><th>Время</th><th>Наименование</th></tr>
+            <tr><td>1</td><td>8.30-9.10</td><td>Кл.час/портф</td></tr>
+            <tr><td>2</td><td>9.20-10.00</td><td>Математика</td></tr>
+            <tr><td>3</td><td>10.10-10.50</td><td>Физкультура</td></tr>
+            <tr><td>4</td><td>10.50-11.10</td><td>ЗАВТРАК</td></tr>
+            <tr><td>4</td><td>11.10-11.50</td><td>Рус.язык</td></tr>
+            <tr><td>5</td><td>12.10-12.50</td><td>Д.П.</td></tr>
+            <tr><td>6</td><td>13.00-13.40</td><td>Чтение</td></tr>
+            <tr><td>7</td><td>13.50-14.30</td><td>Самоподгототовка</td></tr>
+            <tr><td>7</td><td>14.30-14-50</td><td>ОБЕД</td></tr>
+            <tr><td>8</td><td>14.50-15.30</td><td>ВМИ</td></tr>
+        </table>
+    </div>
+    
+    <script>
+        function showSchedule(day) {
+            // Скрыть все расписания
+            const schedules = document.querySelectorAll('.schedule');
+            schedules.forEach(schedule => {
+                schedule.style.display = 'none';
+            });
+            
+            // Показать выбранное расписание
+            const selectedSchedule = document.getElementById(day);
+            if (selectedSchedule) {
+                selectedSchedule.style.display = 'block';
+            }
+        }
+        
+        // Показать расписание на понедельник при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            showSchedule('monday');
+        });
+    </script>
+</body>
+</html>
