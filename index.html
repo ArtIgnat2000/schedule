@@ -2,178 +2,313 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <title>Расписание 3Б класса</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Расписание уроков</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
+            font-family: 'Comic Sans MS', 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            margin: 0;
             padding: 20px;
+            line-height: 1.6;
         }
-        .buttons-container {
-            display: flex;
-            justify-content: space-between;
+        header {
+            text-align: center;
+            background-color: #ff9900;
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
             margin-bottom: 20px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1505117877015-6f9b1e337d15?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            opacity: 0.2;
+            z-index: -1;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.8em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: pulse 2s infinite;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://i.pinimg.com/564x/9c/f6/0c/9cf60c1c3b5b3d0a3b3c3b3c3b3c3b3c.jpg') repeat;
+            opacity: 0.05;
+            z-index: -1;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 30px;
             flex-wrap: wrap;
         }
-        .day-button {
-            padding: 10px 15px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
+        button {
+            padding: 14px 24px;
+            font-size: 1.2em;
             cursor: pointer;
-            font-size: 16px;
-            margin: 5px;
-            flex-grow: 1;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transform: scale(1);
         }
-        .day-button:hover {
-            background-color: #45a049;
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
         }
+        button.active {
+            transform: scale(1.15);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Цвета по дням */
+        button:nth-child(1) { background-color: #ff6b6b; } /* Пн — красный */
+        button:nth-child(2) { background-color: #4ecdc4; } /* Вт — бирюзовый */
+        button:nth-child(3) { background-color: #45b7d1; } /* Ср — голубой */
+        button:nth-child(4) { background-color: #96ceb4; } /* Чт — зелёный */
+        button:nth-child(5) { background-color: #f9cb9c; } /* Пт — оранжевый */
+
+        button span {
+            display: inline-block;
+            margin-right: 8px;
+        }
+
         .schedule {
             display: none;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            padding: 15px;
-            background-color: #f9f9f9;
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 15px;
+            border-left: 6px solid #ff9900;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            animation: fadeIn 0.8s ease-in-out;
         }
-        .schedule-table {
+        .schedule.show {
+            display: block;
+        }
+
+        table {
             width: 100%;
             border-collapse: collapse;
+            margin: 15px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
-        .schedule th, .schedule td {
+        th, td {
             border: 1px solid #ddd;
-            padding: 8px;
+            padding: 12px;
+            font-size: 1.1em;
+        }
+        th {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-weight: bold;
+        }
+        /* № — по центру, Время и Урок — по левому краю */
+        th:first-child, td:first-child {
+            text-align: center;
+        }
+        th:nth-child(2), td:nth-child(2),
+        th:nth-child(3), td:nth-child(3) {
             text-align: left;
+            padding-left: 16px;
         }
-        .schedule th {
-            background-color: #f2f2f2;
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
         }
-        .schedule tr:nth-child(even) {
-            background-color: #f9f9f9;
+        .meal {
+            background-color: #fffacd !important;
+            font-weight: bold;
+            color: #8b4513;
         }
-        h2 {
-            color: #333;
-            margin-top: 0;
+        .meal td {
+            border: 2px solid #ffd700;
+        }
+        tr:hover:not(.meal) {
+            background-color: #e9f5ff;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #fff;
+            font-size: 0.9em;
+            background-color: rgba(0,0,0,0.5);
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
-    <h1>Расписание уроков 3Б Класс. Школа № 186</h1>
-    
-    <div class="buttons-container">
-        <button class="day-button" onclick="showSchedule('monday')">Понедельник</button>
-        <button class="day-button" onclick="showSchedule('tuesday')">Вторник</button>
-        <button class="day-button" onclick="showSchedule('wednesday')">Среда</button>
-        <button class="day-button" onclick="showSchedule('thursday')">Четверг</button>
-        <button class="day-button" onclick="showSchedule('friday')">Пятница</button>
+
+    <header>
+        <h1>📚 Расписание 3 «Б» класса</h1>
+        <p>Выберите день недели</p>
+    </header>
+
+    <div class="container">
+        <div class="buttons">
+            <button onclick="showDay('pn')" class="active">
+                <span>📅</span> Понедельник
+            </button>
+            <button onclick="showDay('vt')">
+                <span>📅</span> Вторник
+            </button>
+            <button onclick="showDay('sr')">
+                <span>📅</span> Среда
+            </button>
+            <button onclick="showDay('cht')">
+                <span>📅</span> Четверг
+            </button>
+            <button onclick="showDay('pt')">
+                <span>📅</span> Пятница
+            </button>
+        </div>
+
+        <!-- Расписание по дням -->
+        <div id="pn" class="schedule show">
+            <h2>🎓 Понедельник</h2>
+            <table>
+                <tr><th>№</th><th>Время</th><th>Урок</th></tr>
+                <tr><td>1</td><td>8:30–9:10</td><td>👩‍🏫 Кл.час / Портфолио</td></tr>
+                <tr><td>2</td><td>9:20–10:00</td><td>🧮 Математика</td></tr>
+                <tr><td>3</td><td>10:10–10:50</td><td>🏃 Физкультура</td></tr>
+                <tr class="meal"><td></td><td>10:50–11:10</td><td>🍳 ЗАВТРАК</td></tr>
+                <tr><td>4</td><td>11:10–11:50</td><td>📖 Русский язык</td></tr>
+                <tr><td>5</td><td>12:10–12:50</td><td>🎨 Д.П. (Доп. Программа)</td></tr>
+                <tr><td>6</td><td>13:00–13:40</td><td>📚 Чтение</td></tr>
+                <tr><td>7</td><td>13:50–14:30</td><td>📝 Самоподготовка</td></tr>
+                <tr class="meal"><td></td><td>14:30–14:50</td><td>🍽️ ОБЕД</td></tr>
+                <tr><td>8</td><td>14:50–15:30</td><td>🌍 ВМИ — В мире информации</td></tr>
+            </table>
+        </div>
+
+        <div id="vt" class="schedule">
+            <h2>📘 Вторник</h2>
+            <table>
+                <tr><th>№</th><th>Время</th><th>Урок</th></tr>
+                <tr><td>1</td><td>8:30–9:10</td><td>🧮 Математика</td></tr>
+                <tr><td>2</td><td>9:20–10:00</td><td>📖 Русский язык</td></tr>
+                <tr><td>3</td><td>10:10–10:50</td><td>🌳 ПРОГУЛКА</td></tr>
+                <tr class="meal"><td></td><td>10:50–11:10</td><td>🍳 ЗАВТРАК</td></tr>
+                <tr><td>4</td><td>11:10–11:50</td><td>📚 Чтение</td></tr>
+                <tr><td>5</td><td>12:10–12:50</td><td>🌍 Окружающий мир</td></tr>
+                <tr><td>6</td><td>13:00–13:40</td><td>🎵 Музыка</td></tr>
+                <tr><td>7</td><td>13:50–14:30</td><td>📝 Самоподготовка</td></tr>
+                <tr class="meal"><td></td><td>14:30–14:50</td><td>🍽️ ОБЕД</td></tr>
+                <tr><td>8</td><td>14:50–15:30</td><td>🎨 ИЗО</td></tr>
+            </table>
+        </div>
+
+        <div id="sr" class="schedule">
+            <h2>🎨 Среда</h2>
+            <table>
+                <tr><th>№</th><th>Время</th><th>Урок</th></tr>
+                <tr><td>1</td><td>8:30–9:10</td><td>📖 Русский язык</td></tr>
+                <tr><td>2</td><td>9:20–10:00</td><td>🧮 Математика</td></tr>
+                <tr><td>3</td><td>10:10–10:50</td><td>📚 Чтение</td></tr>
+                <tr class="meal"><td></td><td>10:50–11:10</td><td>🍳 ЗАВТРАК</td></tr>
+                <tr><td>4</td><td>11:10–11:50</td><td>🌳 ПРОГУЛКА</td></tr>
+                <tr><td>5</td><td>12:10–12:50</td><td>🌐 Англ / ТРИЗ</td></tr>
+                <tr><td>6</td><td>13:00–13:40</td><td>🧠 ТРИЗ / Англ</td></tr>
+                <tr><td>7</td><td>13:50–14:30</td><td>📝 Самоподготовка</td></tr>
+                <tr class="meal"><td></td><td>14:30–14:50</td><td>🍽️ ОБЕД</td></tr>
+                <tr><td>8</td><td>14:50–15:30</td><td>🧪 Технология</td></tr>
+            </table>
+        </div>
+
+        <div id="cht" class="schedule">
+            <h2>💪 Четверг</h2>
+            <table>
+                <tr><th>№</th><th>Время</th><th>Урок</th></tr>
+                <tr><td>1</td><td>8:30–9:10</td><td>📖 Русский язык</td></tr>
+                <tr><td>2</td><td>9:20–10:00</td><td>🧮 Математика</td></tr>
+                <tr><td>3</td><td>10:10–10:50</td><td>📚 Чтение</td></tr>
+                <tr class="meal"><td></td><td>10:50–11:10</td><td>🍳 ЗАВТРАК</td></tr>
+                <tr><td>4</td><td>11:10–11:50</td><td>🏃 Физкультура</td></tr>
+                <tr><td>5</td><td>12:10–12:50</td><td>🔧 Технология</td></tr>
+                <tr><td>6</td><td>13:00–13:40</td><td>🎮 Игры</td></tr>
+                <tr><td>7</td><td>13:50–14:30</td><td>📝 Самоподготовка</td></tr>
+                <tr class="meal"><td></td><td>14:30–14:50</td><td>🍽️ ОБЕД</td></tr>
+                <tr><td>8</td><td>14:50–15:30</td><td>🌊 Бассейн</td></tr>
+            </table>
+        </div>
+
+        <div id="pt" class="schedule">
+            <h2>🏊‍♂️ Пятница</h2>
+            <table>
+                <tr><th>№</th><th>Время</th><th>Урок</th></tr>
+                <tr><td>1</td><td>8:30–9:10</td><td>📖 Русский язык</td></tr>
+                <tr><td>2</td><td>9:20–10:00</td><td>🧮 Математика</td></tr>
+                <tr><td>3</td><td>10:10–10:50</td><td>📚 Чтение</td></tr>
+                <tr class="meal"><td></td><td>10:50–11:10</td><td>🍳 ЗАВТРАК</td></tr>
+                <tr><td>4</td><td>11:10–11:50</td><td>🌳 ПРОГУЛКА</td></tr>
+                <tr><td>5</td><td>12:10–12:50</td><td>🌐 Англ / ИТ</td></tr>
+                <tr><td>6</td><td>13:00–13:40</td><td>💻 ИТ / Англ</td></tr>
+                <tr><td>7</td><td>13:50–14:30</td><td>📝 Самоподготовка</td></tr>
+                <tr class="meal"><td></td><td>14:30–14:50</td><td>🍽️ ОБЕД</td></tr>
+                <tr><td>8</td><td>14:50–15:30</td><td>🎉 Отдых / Игры</td></tr>
+            </table>
+        </div>
     </div>
-    
-    <div id="monday" class="schedule">
-        <h2>Понедельник</h2>
-        <table class="schedule-table">
-            <tr><th>№</th><th>Время</th><th>Наименование</th></tr>
-            <tr><td>1</td><td>8.30-9.10</td><td>Кл.час/портф</td></tr>
-            <tr><td>2</td><td>9.20-10.00</td><td>Математика</td></tr>
-            <tr><td>3</td><td>10.10-10.50</td><td>Физкультура</td></tr>
-            <tr><td>4</td><td>10.50-11.10</td><td>ЗАВТРАК</td></tr>
-            <tr><td>4</td><td>11.10-11.50</td><td>Рус.язык</td></tr>
-            <tr><td>5</td><td>12.10-12.50</td><td>Д.П.</td></tr>
-            <tr><td>6</td><td>13.00-13.40</td><td>Чтение</td></tr>
-            <tr><td>7</td><td>13.50-14.30</td><td>Самоподгототовка</td></tr>
-            <tr><td>7</td><td>14.30-14-50</td><td>ОБЕД</td></tr>
-            <tr><td>8</td><td>14.50-15.30</td><td>ВМИ</td></tr>
-        </table>
-    </div>
-    
-    <div id="tuesday" class="schedule">
-        <h2>Вторник</h2>
-        <table class="schedule-table">
-            <tr><th>№</th><th>Время</th><th>Наименование</th></tr>
-            <tr><td>1</td><td>8.30-9.10</td><td>Кл.час/портф</td></tr>
-            <tr><td>2</td><td>9.20-10.00</td><td>Математика</td></tr>
-            <tr><td>3</td><td>10.10-10.50</td><td>Физкультура</td></tr>
-            <tr><td>4</td><td>10.50-11.10</td><td>ЗАВТРАК</td></tr>
-            <tr><td>4</td><td>11.10-11.50</td><td>Рус.язык</td></tr>
-            <tr><td>5</td><td>12.10-12.50</td><td>Д.П.</td></tr>
-            <tr><td>6</td><td>13.00-13.40</td><td>Чтение</td></tr>
-            <tr><td>7</td><td>13.50-14.30</td><td>Самоподгототовка</td></tr>
-            <tr><td>7</td><td>14.30-14-50</td><td>ОБЕД</td></tr>
-            <tr><td>8</td><td>14.50-15.30</td><td>ВМИ</td></tr>
-        </table>
-    </div>
-    
-    <div id="wednesday" class="schedule">
-        <h2>Среда</h2>
-         <table class="schedule-table">
-            <tr><th>№</th><th>Время</th><th>Наименование</th></tr>
-            <tr><td>1</td><td>8.30-9.10</td><td>Кл.час/портф</td></tr>
-            <tr><td>2</td><td>9.20-10.00</td><td>Математика</td></tr>
-            <tr><td>3</td><td>10.10-10.50</td><td>Физкультура</td></tr>
-            <tr><td>4</td><td>10.50-11.10</td><td>ЗАВТРАК</td></tr>
-            <tr><td>4</td><td>11.10-11.50</td><td>Рус.язык</td></tr>
-            <tr><td>5</td><td>12.10-12.50</td><td>Д.П.</td></tr>
-            <tr><td>6</td><td>13.00-13.40</td><td>Чтение</td></tr>
-            <tr><td>7</td><td>13.50-14.30</td><td>Самоподгототовка</td></tr>
-            <tr><td>7</td><td>14.30-14-50</td><td>ОБЕД</td></tr>
-            <tr><td>8</td><td>14.50-15.30</td><td>ВМИ</td></tr>
-        </table>
-    </div>
-    
-    <div id="thursday" class="schedule">
-        <h2>Четверг</h2>
-         <table class="schedule-table">
-            <tr><th>№</th><th>Время</th><th>Наименование</th></tr>
-            <tr><td>1</td><td>8.30-9.10</td><td>Кл.час/портф</td></tr>
-            <tr><td>2</td><td>9.20-10.00</td><td>Математика</td></tr>
-            <tr><td>3</td><td>10.10-10.50</td><td>Физкультура</td></tr>
-            <tr><td>4</td><td>10.50-11.10</td><td>ЗАВТРАК</td></tr>
-            <tr><td>4</td><td>11.10-11.50</td><td>Рус.язык</td></tr>
-            <tr><td>5</td><td>12.10-12.50</td><td>Д.П.</td></tr>
-            <tr><td>6</td><td>13.00-13.40</td><td>Чтение</td></tr>
-            <tr><td>7</td><td>13.50-14.30</td><td>Самоподгототовка</td></tr>
-            <tr><td>7</td><td>14.30-14-50</td><td>ОБЕД</td></tr>
-            <tr><td>8</td><td>14.50-15.30</td><td>ВМИ</td></tr>
-        </table>
-    </div>
-    
-    <div id="friday" class="schedule">
-        <h2>Пятница</h2>
-         <table class="schedule-table">
-            <tr><th>№</th><th>Время</th><th>Наименование</th></tr>
-            <tr><td>1</td><td>8.30-9.10</td><td>Кл.час/портф</td></tr>
-            <tr><td>2</td><td>9.20-10.00</td><td>Математика</td></tr>
-            <tr><td>3</td><td>10.10-10.50</td><td>Физкультура</td></tr>
-            <tr><td>4</td><td>10.50-11.10</td><td>ЗАВТРАК</td></tr>
-            <tr><td>4</td><td>11.10-11.50</td><td>Рус.язык</td></tr>
-            <tr><td>5</td><td>12.10-12.50</td><td>Д.П.</td></tr>
-            <tr><td>6</td><td>13.00-13.40</td><td>Чтение</td></tr>
-            <tr><td>7</td><td>13.50-14.30</td><td>Самоподгототовка</td></tr>
-            <tr><td>7</td><td>14.30-14-50</td><td>ОБЕД</td></tr>
-            <tr><td>8</td><td>14.50-15.30</td><td>ВМИ</td></tr>
-        </table>
-    </div>
-    
+
+    <footer>
+        &copy; 2025 Школа №186 | Сайт для учеников 3 «Б»
+    </footer>
+
     <script>
-        function showSchedule(day) {
-            // Скрыть все расписания
-            const schedules = document.querySelectorAll('.schedule');
-            schedules.forEach(schedule => {
-                schedule.style.display = 'none';
+        function showDay(day) {
+            document.querySelectorAll('.buttons button').forEach(btn => {
+                btn.classList.remove('active');
             });
-            
-            // Показать выбранное расписание
-            const selectedSchedule = document.getElementById(day);
-            if (selectedSchedule) {
-                selectedSchedule.style.display = 'block';
-            }
+            document.querySelector(`button[onclick="showDay('${day}')"]`).classList.add('active');
+            document.querySelectorAll('.schedule').forEach(schedule => {
+                schedule.classList.remove('show');
+            });
+            document.getElementById(day).classList.add('show');
         }
-        
-        // Показать расписание на понедельник при загрузке страницы
-        document.addEventListener('DOMContentLoaded', function() {
-            showSchedule('monday');
-        });
     </script>
 </body>
 </html>
