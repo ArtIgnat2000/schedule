@@ -5,90 +5,84 @@
     <title>Расписание 3Б класса</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        :root {
+            --header-bg: #ff9900;
+            --primary-color: #4a90e2;
+            --gradient-start: #667eea;
+            --gradient-end: #764ba2;
+        }
+
         body {
-            font-family: 'Comic Sans MS', 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Segoe UI', 'Comic Sans MS', sans-serif;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
             color: #333;
             margin: 0;
-            padding: 20px;
-            line-height: 1.6;
+            padding: 10px;
+            line-height: 1.5;
         }
+
         header {
             text-align: center;
-            background-color: #ff9900;
+            background-color: var(--header-bg);
             color: white;
-            padding: 25px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-            position: relative;
-            overflow: hidden;
+            padding: 12px 10px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
         }
-        header::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://images.unsplash.com/photo-1505117877015-6f9b1e337d15?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
-            background-size: cover;
-            opacity: 0.2;
-            z-index: -1;
-        }
+
         h1 {
             margin: 0;
-            font-size: 2.8em;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            animation: pulse 2s infinite;
+            font-size: 1.8rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
+
+        .subtitle {
+            margin: 5px 0 0;
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
         .container {
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
             background-color: white;
-            padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            position: relative;
-            overflow: hidden;
-        }
-        .container::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://i.pinimg.com/564x/9c/f6/0c/9cf60c1c3b5b3d0a3b3c3b3c3b3c3b3c.jpg') repeat;
-            opacity: 0.05;
-            z-index: -1;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
         .buttons {
             display: flex;
             justify-content: center;
-            gap: 12px;
-            margin-bottom: 30px;
+            gap: 8px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
         }
+
         button {
-            padding: 14px 24px;
-            font-size: 1.2em;
+            padding: 12px 16px;
+            font-size: 0.95rem;
             cursor: pointer;
             border: none;
-            border-radius: 50px;
+            border-radius: 8px;
             font-weight: bold;
-            transition: all 0.4s ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            transform: scale(1);
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            flex: 1;
+            min-width: 100px;
+            white-space: nowrap;
         }
+
         button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
+
         button.active {
-            transform: scale(1.15);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            background-color: var(--primary-color);
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
         /* Цвета по дням */
@@ -98,21 +92,15 @@
         button:nth-child(4) { background-color: #96ceb4; } /* Чт — зелёный */
         button:nth-child(5) { background-color: #f9cb9c; } /* Пт — оранжевый */
 
-        button span {
-            display: inline-block;
-            margin-right: 8px;
-        }
-
         .schedule {
             display: none;
-            margin-top: 25px;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 15px;
-            border-left: 6px solid #ff9900;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            animation: fadeIn 0.8s ease-in-out;
+            margin-top: 20px;
+            padding: 12px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid var(--header-bg);
         }
+
         .schedule.show {
             display: block;
         }
@@ -120,159 +108,190 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 15px 0;
-            border-radius: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 5px rgba(0,0,0,0.05);
         }
+
         th, td {
             border: 1px solid #ddd;
-            padding: 12px;
-            font-size: 1.1em;
+            padding: 10px 8px;
+            font-size: 0.95rem;
+            text-align: left;
         }
+
         th {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
             color: white;
             font-weight: bold;
-        }
-        /* № — по центру, Время и Урок — по левому краю */
-        th:first-child, td:first-child {
             text-align: center;
         }
-        th:nth-child(2), td:nth-child(2),
-        th:nth-child(3), td:nth-child(3) {
-            text-align: left;
-            padding-left: 16px;
+
+        th:first-child, td:first-child {
+            text-align: center;
+            width: 40px;
         }
+
         tr:nth-child(even) {
-            background-color: #f8f9fa;
+            background-color: #f0f4f8;
         }
+
         tr:hover {
             background-color: #e9f5ff;
         }
 
         footer {
             text-align: center;
-            margin-top: 30px;
-            color: #fff;
-            font-size: 0.9em;
-            background-color: rgba(0,0,0,0.5);
-            padding: 10px;
-            border-radius: 10px;
-            margin-bottom: 20px;
+            margin-top: 20px;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.8rem;
+            padding: 8px;
+            border-radius: 8px;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+        /* Адаптация для мобильных устройств */
+        @media (max-width: 600px) {
+            body {
+                padding: 8px;
+            }
+            
+            header {
+                padding: 10px 8px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .subtitle {
+                font-size: 0.9rem;
+            }
+            
+            .container {
+                padding: 12px;
+            }
+            
+            .buttons {
+                gap: 6px;
+                margin-bottom: 15px;
+            }
+            
+            button {
+                padding: 10px 12px;
+                font-size: 0.85rem;
+                min-width: 85px;
+            }
+            
+            th, td {
+                padding: 8px 6px;
+                font-size: 0.9rem;
+            }
+            
+            footer {
+                font-size: 0.75rem;
+                margin-top: 15px;
+            }
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 400px) {
+            button {
+                padding: 8px 10px;
+                font-size: 0.8rem;
+                min-width: 80px;
+            }
+            
+            th, td {
+                padding: 7px 5px;
+                font-size: 0.85rem;
+            }
         }
     </style>
 </head>
 <body>
-
     <header>
-        <h1>📚 Расписание 3 «Б» класса</h1>
-        <p>Выберите день недели</p>
+        <h1>📚 Расписание 3 «Б»</h1>
+        <div class="subtitle">Школа №186</div>
     </header>
 
     <div class="container">
         <div class="buttons">
-            <button onclick="showDay('pn')" class="active">
-                <span>📅</span> Понедельник
-            </button>
-            <button onclick="showDay('vt')">
-                <span>📅</span> Вторник
-            </button>
-            <button onclick="showDay('sr')">
-                <span>📅</span> Среда
-            </button>
-            <button onclick="showDay('cht')">
-                <span>📅</span> Четверг
-            </button>
-            <button onclick="showDay('pt')">
-                <span>📅</span> Пятница
-            </button>
+            <button onclick="showDay('pn')" class="active">Пн</button>
+            <button onclick="showDay('vt')">Вт</button>
+            <button onclick="showDay('sr')">Ср</button>
+            <button onclick="showDay('cht')">Чт</button>
+            <button onclick="showDay('pt')">Пт</button>
         </div>
 
         <!-- Расписание по дням -->
         <div id="pn" class="schedule show">
-            <h2>🎓 Понедельник</h2>
             <table>
                 <tr><th>№</th><th>Время</th><th>Урок</th></tr>
                 <tr><td>1</td><td>8:30–9:10</td><td>🧮 Математика</td></tr>
-                <tr><td>2</td><td>9:30–10:10</td><td>📖 Русский язык</td></tr>
+                <tr><td>2</td><td>9:30–10:10</td><td>📖 Рус.язык</td></tr>
                 <tr><td>3</td><td>10:20–11:00</td><td>🌳 ПРОГУЛКА</td></tr>
-                <tr><td>4</td><td>11:20–12:00</td><td>🌍 Окружающий мир</td></tr>
+                <tr><td>4</td><td>11:20–12:00</td><td>🌍 Окр.мир</td></tr>
                 <tr><td>5</td><td>12:20–13:00</td><td>📚 Чтение</td></tr>
                 <tr><td>6</td><td>13:10–13:50</td><td>🎵 Музыка</td></tr>
-                <tr><td>7</td><td>14:00–14:40</td><td>👩‍🏫 Классный час</td></tr>
+                <tr><td>7</td><td>14:00–14:40</td><td>👩‍🏫 Кл.час</td></tr>
             </table>
         </div>
 
         <div id="vt" class="schedule">
-            <h2>📘 Вторник</h2>
             <table>
                 <tr><th>№</th><th>Время</th><th>Урок</th></tr>
-                <tr><td>1</td><td>8:30–9:10</td><td>🌐 Англ / ТРИЗ</td></tr>
-                <tr><td>2</td><td>9:30–10:10</td><td>🧠 ТРИЗ / Англ</td></tr>
-                <tr><td>3</td><td>10:20–11:00</td><td>📖 Русский язык</td></tr>
+                <tr><td>1</td><td>8:30–9:10</td><td>🌐 Анг/Триз</td></tr>
+                <tr><td>2</td><td>9:30–10:10</td><td>🧠 Триз/Анг</td></tr>
+                <tr><td>3</td><td>10:20–11:00</td><td>📖 Рус.яз.</td></tr>
                 <tr><td>4</td><td>11:20–12:00</td><td>🌳 ПРОГУЛКА</td></tr>
                 <tr><td>5</td><td>12:20–13:00</td><td>🧮 Математика</td></tr>
-                <tr><td>6</td><td>13:10–13:50</td><td>🏃 Физкультура</td></tr>
+                <tr><td>6</td><td>13:10–13:50</td><td>🏃 ФИЗКУЛЬТУРА</td></tr>
                 <tr><td>7</td><td>14:00–14:40</td><td>📝 СП</td></tr>
             </table>
         </div>
 
         <div id="sr" class="schedule">
-            <h2>🎨 Среда</h2>
             <table>
                 <tr><th>№</th><th>Время</th><th>Урок</th></tr>
-                <tr><td>1</td><td>8:30–9:10</td><td>📖 Русский язык</td></tr>
-                <tr><td>2</td><td>9:30–10:10</td><td>🧮 Математика</td></tr>
+                <tr><td>1</td><td>8:30–9:10</td><td>📖 Рус.язык</td></tr>
+                <tr><td>2</td><td>9:30–10:10</td><td>🧮 Матем</td></tr>
                 <tr><td>3</td><td>10:20–11:00</td><td>📚 Чтение</td></tr>
                 <tr><td>4</td><td>11:20–12:00</td><td>🌳 ПРОГУЛКА</td></tr>
                 <tr><td>5</td><td>12:20–13:00</td><td>🎨 ИЗО</td></tr>
-                <tr><td>6</td><td>13:10–13:50</td><td>🌍 Окружающий мир</td></tr>
+                <tr><td>6</td><td>13:10–13:50</td><td>🌍 Окр.мир</td></tr>
                 <tr><td>7</td><td>14:00–14:40</td><td>📝 СП</td></tr>
             </table>
         </div>
 
         <div id="cht" class="schedule">
-            <h2>💪 Четверг</h2>
             <table>
                 <tr><th>№</th><th>Время</th><th>Урок</th></tr>
-                <tr><td>1</td><td>8:30–9:10</td><td>📖 Русский язык</td></tr>
-                <tr><td>2</td><td>9:30–10:10</td><td>🧮 Математика</td></tr>
+                <tr><td>1</td><td>8:30–9:10</td><td>📖 Рус.язык</td></tr>
+                <tr><td>2</td><td>9:30–10:10</td><td>🧮 Матем</td></tr>
                 <tr><td>3</td><td>10:20–11:00</td><td>📚 Чтение</td></tr>
                 <tr><td>4</td><td>11:20–12:00</td><td>🌳 ПРОГУЛКА</td></tr>
-                <tr><td>5</td><td>12:20–13:00</td><td>🏃 Физкультура</td></tr>
+                <tr><td>5</td><td>12:20–13:00</td><td>🏃 ФИЗКУЛЬТУРА</td></tr>
                 <tr><td>6</td><td>13:10–13:50</td><td>🔧 Технология</td></tr>
                 <tr><td>7</td><td>14:00–14:40</td><td>🎮 Игры</td></tr>
             </table>
         </div>
 
         <div id="pt" class="schedule">
-            <h2>🏊‍♂️ Пятница</h2>
             <table>
                 <tr><th>№</th><th>Время</th><th>Урок</th></tr>
-                <tr><td>1</td><td>8:30–9:10</td><td>📖 Русский язык</td></tr>
-                <tr><td>2</td><td>9:30–10:10</td><td>🧮 Математика</td></tr>
+                <tr><td>1</td><td>8:30–9:10</td><td>📖 Рус.язык</td></tr>
+                <tr><td>2</td><td>9:30–10:10</td><td>🧮 Матем</td></tr>
                 <tr><td>3</td><td>10:20–11:00</td><td>📚 Чтение</td></tr>
                 <tr><td>4</td><td>11:20–12:00</td><td>🌊 Бассейн</td></tr>
-                <tr><td>5</td><td>12:20–13:00</td><td>🌐 Англ / ИТ</td></tr>
-                <tr><td>6</td><td>13:10–13:50</td><td>💻 ИТ / Англ</td></tr>
+                <tr><td>5</td><td>12:20–13:00</td><td>🌐 Анг/ИТ</td></tr>
+                <tr><td>6</td><td>13:10–13:50</td><td>💻 ИТ/Анг</td></tr>
                 <tr><td>7</td><td>14:00–14:40</td><td>🌳 ПРОГУЛКА</td></tr>
             </table>
         </div>
     </div>
 
     <footer>
-        &copy; 2025 Школа №186 | Сайт для учеников 3 «Б»
+        &copy; 2025 Школа №186
     </footer>
 
     <script>
