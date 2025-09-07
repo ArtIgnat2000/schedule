@@ -29,6 +29,7 @@
             border-radius: 12px;
             margin-bottom: 15px;
             box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+            position: relative;
         }
 
         h1 {
@@ -43,20 +44,49 @@
             opacity: 0.9;
         }
 
+        .meal-link-container {
+            margin-top: 10px;
+        }
+
         .meal-link {
             display: inline-block;
-            margin-top: 8px;
-            padding: 6px 12px;
-            background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            border-radius: 25px;
             text-decoration: none;
             color: white;
-            font-size: 0.9rem;
-            transition: background-color 0.3s;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border: 2px solid white;
+            position: relative;
+            overflow: hidden;
         }
 
         .meal-link:hover {
-            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            background: linear-gradient(135deg, #ff5252, #d32f2f);
+        }
+
+        .meal-link:active {
+            transform: translateY(0) scale(1);
+        }
+
+        .meal-link::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .meal-link:hover::before {
+            left: 100%;
         }
 
         .container {
@@ -185,8 +215,8 @@
             }
             
             .meal-link {
-                font-size: 0.8rem;
-                padding: 4px 10px;
+                padding: 8px 16px;
+                font-size: 1rem;
             }
             
             .container {
@@ -216,6 +246,11 @@
         }
 
         @media (max-width: 400px) {
+            .meal-link {
+                padding: 6px 12px;
+                font-size: 0.9rem;
+            }
+            
             button {
                 padding: 8px 10px;
                 font-size: 0.8rem;
@@ -232,8 +267,9 @@
 <body>
     <header>
         <h1>📚 Расписание 3 «Б»</h1>
-        <div class="subtitle">Школа №186</div>
-        <a href="https://artignat2000.github.io/meal-schedule/" target="_blank" class="meal-link">🍽️ Питание</a>
+        <div class="meal-link-container">
+            <a href="https://artignat2000.github.io/meal-schedule/" target="_blank" class="meal-link">🍽️ ПИТАНИЕ</a>
+        </div>
     </header>
 
     <div class="container">
@@ -313,7 +349,7 @@
     </div>
 
     <footer>
-        &copy; 2025 Школа №186
+        &copy; 2025
     </footer>
 
     <script>
