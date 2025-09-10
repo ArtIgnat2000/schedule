@@ -268,7 +268,7 @@
     <header>
         <h1>📚 Расписание 3 «Б»</h1>
         <div class="meal-link-container">
-            <a href="https://artignat2000.github.io/meal-schedule/" target="_blank" class="meal-link">🍽️ ПИТАНИЕ</a>
+            <a href="https://artignat2000.github.io/meal-schedule/" class="meal-link">🍽️ ПИТАНИЕ</a>
         </div>
     </header>
 
@@ -353,6 +353,18 @@
     </footer>
 
     <script>
+        // Обработчик для ссылки "ПИТАНИЕ"
+        document.querySelector('.meal-link').addEventListener('click', function(event) {
+            // Предотвращаем переход по ссылке по умолчанию
+            event.preventDefault();
+            
+            // Получаем URL из атрибута href
+            const url = this.getAttribute('href').trim(); // Удаляем пробелы
+            
+            // Открываем URL в текущем окне
+            window.location.href = url;
+        });
+
         function showDay(day) {
             document.querySelectorAll('.buttons button').forEach(btn => {
                 btn.classList.remove('active');
