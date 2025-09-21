@@ -134,6 +134,7 @@
             border: 2px solid white;
             position: relative;
             overflow: hidden;
+            margin: 0 5px; /* Добавлен отступ */
         }
 
         .meal-link:hover {
@@ -209,6 +210,11 @@
         button:nth-child(3) { background-color: #45b7d1; } /* Ср — голубой */
         button:nth-child(4) { background-color: #96ceb4; } /* Чт — зелёный */
         button:nth-child(5) { background-color: #f9cb9c; } /* Пт — оранжевый */
+        /* Новый стиль для кнопки "Каникулы" */
+        button:nth-child(6) { 
+            background-color: #dda0dd; /* Сливовый цвет */
+            color: #fff; 
+        } 
 
         .schedule {
             display: none;
@@ -348,6 +354,7 @@
         <h1>📚 Расписание 3 «Б»</h1>
         <div class="meal-link-container">
             <a href="https://artignat2000.github.io/meal-schedule/" class="meal-link">🍽️ ПИТАНИЕ</a>
+            <a href="https://artignat2000.github.io/RaspisCanicyl/" target="_blank" class="meal-link">📅 КАНИКУЛЫ</a>
         </div>
     </header>
 
@@ -358,6 +365,7 @@
             <button onclick="showDay('sr')">Ср</button>
             <button onclick="showDay('cht')">Чт</button>
             <button onclick="showDay('pt')">Пт</button>
+            <button onclick="window.open('https://artignat2000.github.io/RaspisCanicyl/', '_blank')">Каникулы</button>
         </div>
 
         <!-- Расписание по дням -->
@@ -434,7 +442,7 @@
 
     <script>
         // Обработчик для ссылки "ПИТАНИЕ"
-        document.querySelector('.meal-link').addEventListener('click', function(event) {
+        document.querySelector('.meal-link[href*="meal-schedule"]').addEventListener('click', function(event) {
             // Предотвращаем переход по ссылке по умолчанию
             event.preventDefault();
             
@@ -446,9 +454,20 @@
         });
 
         function showDay(day) {
+            // Если нажата кнопка "Каникулы", открываем новую вкладку и выходим
+            if (day === 'holidays') {
+                window.open('https://artignat2000.github.io/RaspisCanicyl/', '_blank');
+                return;
+            }
+
             document.querySelectorAll('.buttons button').forEach(btn => {
                 btn.classList.remove('active');
             });
+            // Убираем активный класс с кнопки "Каникулы"
+            const holidayButton = document.querySelector('.buttons button:last-child');
+            if (holidayButton && holidayButton.textContent.includes('Каникулы')) {
+                holidayButton.classList.remove('active');
+            }
             document.querySelector(`button[onclick="showDay('${day}')"]`).classList.add('active');
             document.querySelectorAll('.schedule').forEach(schedule => {
                 schedule.classList.remove('show');
