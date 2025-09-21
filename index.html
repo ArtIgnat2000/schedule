@@ -354,7 +354,7 @@
         <h1>📚 Расписание 3 «Б»</h1>
         <div class="meal-link-container">
             <a href="https://artignat2000.github.io/meal-schedule/" class="meal-link">🍽️ ПИТАНИЕ</a>
-            <a href="https://artignat2000.github.io/RaspisCanicyl/" target="_blank" class="meal-link">📅 КАНИКУЛЫ</a>
+            <a href="https://artignat2000.github.io/RaspisCanicyl/" class="meal-link">📅 КАНИКУЛЫ</a>
         </div>
     </header>
 
@@ -453,10 +453,22 @@
             window.location.href = url;
         });
 
+        // Обработчик для ссылки "КАНИКУЛЫ"
+        document.querySelector('.meal-link[href*="RaspisCanicyl"]').addEventListener('click', function(event) {
+            // Предотвращаем переход по ссылке по умолчанию
+            event.preventDefault();
+            
+            // Получаем URL из атрибута href
+            const url = this.getAttribute('href').trim(); // Удаляем пробелы
+            
+            // Открываем URL в текущем окне
+            window.location.href = url;
+        });
+
         function showDay(day) {
-            // Если нажата кнопка "Каникулы", открываем новую вкладку и выходим
+            // Если нажата кнопка "Каникулы", открываем в текущем окне и выходим
             if (day === 'holidays') {
-                window.open('https://artignat2000.github.io/RaspisCanicyl/', '_blank');
+                window.location.href = 'https://artignat2000.github.io/RaspisCanicyl/';
                 return;
             }
 
