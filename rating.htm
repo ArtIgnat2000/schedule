@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Шкала оценок</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 50%;
+            margin: 20px auto;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 12px;
+            text-align: center; /* по умолчанию */
+        }
+        th {
+            background-color: #f0f0f5;
+            font-weight: 600;
+        }
+        td:last-child { /* столбец "Оценка" */
+            text-align: left;
+        }
+        .red-bg { 
+            background-color: #ff6b6b; 
+            color: white;
+        }
+        .yellow-bg { 
+            background-color: #ffd166; 
+            color: black;
+        }
+        .green-bg { 
+            background-color: #06d6a0; 
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <h2 style="text-align: center; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">Границы оценок</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Баллы</th>
+                <th>Оценка</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="red-bg">40 - 69</td>
+                <td>3 - Удовлетворительно</td>
+            </tr>
+            <tr>
+                <td class="yellow-bg">70 - 84</td>
+                <td>4 - Хорошо</td>
+            </tr>
+            <tr>
+                <td class="green-bg">85 - 100</td>
+                <td>5 - Отлично</td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>
